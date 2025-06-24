@@ -10,6 +10,7 @@ from sklearn.pipeline import Pipeline
 def load_data():
     df = pd.read_csv("Mental_Health_FAQ_ID.csv")
     df = df[["Pertanyaan_ID", "Jawaban_ID"]].dropna()
+    df = df[~df["Jawaban_ID"].str.contains("Terjemahan gagal", case=False, na=False)]
     df["pertanyaan_bersih"] = df["Pertanyaan_ID"].apply(bersihkan_teks)
     return df
 
