@@ -1,9 +1,9 @@
 import pandas as pd
 import re
+import streamlit as st
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import Pipeline
-import streamlit as st
 
 # ========== Load & Preprocess ==========
 @st.cache_data
@@ -32,10 +32,28 @@ model = Pipeline([
 model.fit(X, y)
 
 # ========== Streamlit Interface ==========
+st.set_page_config(page_title="Chatbot Kesehatan Mental", page_icon="🧠")
 st.title("🧠 Chatbot Kesehatan Mental")
-st.markdown("Tanyakan hal-hal seputar kesehatan mental, dan saya akan membantumu menjawab!")
+st.markdown("Tanyakan hal-hal seputar kesehatan mental, dan saya akan menjawab berdasarkan FAQ!")
 
-user_input = st.text_input("Apa yang ingin Anda tanyakan? (kecemasan/depresi/tidur/konseling/hubungan sosial)")
+# Contoh pertanyaan
+contoh_pertanyaan = [
+    "Apa itu depresi?",
+    "Bagaimana cara mengatasi rasa cemas?",
+    "Apa perbedaan stres dan kecemasan?",
+    "Saya susah tidur, apakah itu normal?",
+    "Kapan saya harus ke psikolog?",
+]
+
+selected = st.selectbox("💡 Pilih contoh pertanyaan:", options=[""] + contoh_pertanyaan)
+
+if "user_input" not in st.session_state:
+    st.session_state["user_input"] = ""
+
+if selected:
+    st.session_state["user_input"] = selected
+
+user_input = st.text_input("Atau ketik pertanyaanmu di sini:", value=st.session_state["user_input"])
 
 if user_input:
     cleaned = bersihkan_teks(user_input)
