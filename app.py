@@ -22,7 +22,7 @@ def bersihkan_teks(text):
 df = load_data()
 
 # ========== Train Model ==========
-X = df["pertanyaan_bersih"]
+X = df["Pertanyaan_ID"]
 y = df["Jawaban_ID"]
 
 model = Pipeline([
