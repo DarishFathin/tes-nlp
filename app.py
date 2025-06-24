@@ -33,9 +33,9 @@ model.fit(X, y)
 
 # ========== Streamlit Interface ==========
 st.title("🧠 Chatbot Kesehatan Mental")
-st.markdown("Tanyakan hal-hal seputar kesehatan mental, dan saya akan menjawab berdasarkan FAQ!")
+st.markdown("Tanyakan hal-hal seputar kesehatan mental, dan saya akan membantumu menjawab!")
 
-user_input = st.text_input("Apa yang ingin Anda tanyakan?")
+user_input = st.text_input("Apa yang ingin Anda tanyakan? (kecemasan/depresi/tidur/konseling/hubungan sosial)")
 
 if user_input:
     cleaned = bersihkan_teks(user_input)
